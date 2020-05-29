@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "customer")
 public class Customer {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    private int id;
     private String name;
     private String password;
     private double balance;
