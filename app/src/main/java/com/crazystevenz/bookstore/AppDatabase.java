@@ -14,7 +14,7 @@ import com.crazystevenz.bookstore.dao.ProductDao;
 import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 
-@Database(entities = {Customer.class}, version = 1)
+@Database(entities = {Customer.class, Product.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
