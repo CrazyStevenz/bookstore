@@ -9,10 +9,12 @@ public class Customer {
     public int id;
     private String name;
     private String password;
+    private double balance;
 
-    public Customer(String name, String password) {
+    public Customer(String name, String password, double balance) {
         this.name = name;
         this.password = password;
+        this.balance = balance;
     }
 
     public int getId() {
@@ -37,5 +39,13 @@ public class Customer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
