@@ -1,4 +1,4 @@
-package com.crazystevenz.bookstore;
+package com.crazystevenz.bookstore.repository;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,8 +14,9 @@ import com.crazystevenz.bookstore.dao.ProductDao;
 import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 
-@Database(entities = {Customer.class, Product.class}, version = 1)
+@Database(entities = {Customer.class, Product.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
+
     private static AppDatabase instance;
 
     public abstract CustomerDao customerDao();

@@ -1,5 +1,6 @@
 package com.crazystevenz.bookstore.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,11 +16,8 @@ public interface CustomerDao {
     @Query("SELECT * FROM customer WHERE id = :id")
     Customer get(int id);
 
-    @Query("SELECT * FROM customer")
-    List<Customer> getAll();
-
-    @Query("SELECT * FROM customer WHERE name LIKE :name LIMIT 1")
-    Customer getByName(String name);
+    @Query("SELECT * FROM customer ORDER BY id ASC")
+    LiveData<List<Customer>> getAll();
 
     @Insert
     void insert(Customer customer);
