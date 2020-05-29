@@ -19,7 +19,7 @@ public interface CustomerDao {
     List<Customer> getAll();
 
     @Query("SELECT * FROM customer WHERE name LIKE :name LIMIT 1")
-    Customer getByName(String name, String last);
+    Customer getByName(String name);
 
     @Insert
     void insert(Customer customer);
