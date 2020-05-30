@@ -56,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
             void login (String username, String password) {
                 Customer customer = customerViewModel.getByName(username);
                 if (credentialsAreValid(customer, username, password)) {
+                    customer.login();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra("EXTRA_CUSTOMER_ID", customer.getId());
                     startActivity(intent);
                     finish();
                 } else {

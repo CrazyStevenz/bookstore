@@ -1,5 +1,6 @@
 package com.crazystevenz.bookstore.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -11,10 +12,24 @@ public class Customer {
     private String password;
     private double balance;
 
+    private static Customer customerInstance = null;
+
     public Customer(String name, String password, double balance) {
         this.name = name;
         this.password = password;
         this.balance = balance;
+    }
+
+    public void login() {
+        customerInstance = this;
+    }
+
+    public void logout() {
+        customerInstance = null;
+    }
+
+    public static Customer getUserInstance() {
+        return customerInstance;
     }
 
     public int getId() {
@@ -47,5 +62,10 @@ public class Customer {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return id + " - " + name + " - " + balance + "€" + "\n";
     }
 }

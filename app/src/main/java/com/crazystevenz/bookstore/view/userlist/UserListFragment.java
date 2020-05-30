@@ -43,13 +43,7 @@ public class UserListFragment extends Fragment {
             public void onChanged(List<Customer> customers) {
                 StringBuilder sb = new StringBuilder();
                 for (Customer customer : customers) {
-                    sb.append(customer.getId())
-                            .append(" - ")
-                            .append(customer.getName())
-                            .append(" - ")
-                            .append(customer.getBalance())
-                            .append("€")
-                            .append("\n");
+                    sb.append(customer);
                 }
                 textView.setText(sb);
             }
