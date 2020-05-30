@@ -11,16 +11,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.crazystevenz.bookstore.dao.CustomerDao;
 import com.crazystevenz.bookstore.dao.ProductDao;
+import com.crazystevenz.bookstore.dao.SaleDao;
 import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
+import com.crazystevenz.bookstore.model.Sale;
 
-@Database(entities = {Customer.class, Product.class}, version = 1, exportSchema = false)
+@Database(entities = {Customer.class, Product.class, Sale.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
 
     public abstract CustomerDao customerDao();
     public abstract ProductDao productDao();
+    public abstract SaleDao saleDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         // If the instance does not exist, create one
