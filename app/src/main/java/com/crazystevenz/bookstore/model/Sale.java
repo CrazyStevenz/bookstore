@@ -62,4 +62,13 @@ public class Sale {
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
+
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", customerId=" + customerId +
+                ", productId=" + productId +
+                ", productAmount=" + productAmount +
+                ", complete=" + complete + "\n";
+    }
 }
