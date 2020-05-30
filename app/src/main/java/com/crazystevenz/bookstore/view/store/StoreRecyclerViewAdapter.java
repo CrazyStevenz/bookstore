@@ -15,6 +15,9 @@ import com.crazystevenz.bookstore.model.Product;
 import java.util.List;
 
 public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecyclerViewAdapter.ProductHolder> {
+
+    // Source: https://developer.android.com/guide/topics/ui/layout/recyclerview
+
     private List<Product> mProducts;
 
     public StoreRecyclerViewAdapter(List<Product> products) {
