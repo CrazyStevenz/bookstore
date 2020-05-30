@@ -2,9 +2,17 @@ package com.crazystevenz.bookstore.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "sale")
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "sale", foreignKeys = {
+    @ForeignKey(entity = Customer.class, parentColumns = "id", childColumns = "customer_id",
+            onDelete = CASCADE, onUpdate = CASCADE),
+    @ForeignKey(entity = Product.class, parentColumns = "id", childColumns = "product_id",
+            onDelete = CASCADE, onUpdate = CASCADE)
+})
 public class Sale {
     @PrimaryKey(autoGenerate = true)
     private int id;

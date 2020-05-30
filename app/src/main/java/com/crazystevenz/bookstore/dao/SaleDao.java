@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Sale;
 
 import java.util.List;
@@ -19,6 +18,9 @@ public interface SaleDao {
 
     @Query("SELECT * FROM sale")
     LiveData<List<Sale>> getAll();
+
+    @Query("SELECT * FROM sale WHERE complete = 0 AND id = :id")
+    LiveData<List<Sale>> getIncompleteByUserId(int id);
 
     @Insert
     void insert(Sale sale);

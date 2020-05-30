@@ -23,4 +23,8 @@ public class SaleRepository {
     public LiveData<List<Sale>> getAll() {
         return mSales;
     }
+
+    public LiveData<List<Sale>> getIncompleteByUserId(int id) {
+        return mSaleDao.getIncompleteByUserId(id);
+    }
 }
