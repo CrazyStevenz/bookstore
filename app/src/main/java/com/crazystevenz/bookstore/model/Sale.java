@@ -14,14 +14,13 @@ public class Sale {
     private int productId;
     @ColumnInfo(name = "product_amount")
     private double productAmount;
-    @ColumnInfo(name = "paid_amount")
-    private double paidAmount;
+    private boolean complete;
 
-    public Sale(int customerId, int productId, double productAmount, double paidAmount) {
+    public Sale(int customerId, int productId, double productAmount) {
         this.customerId = customerId;
         this.productId = productId;
         this.productAmount = productAmount;
-        this.paidAmount = paidAmount;
+        complete = false;
     }
 
     public int getId() {
@@ -54,13 +53,5 @@ public class Sale {
 
     public void setProductAmount(double productAmount) {
         this.productAmount = productAmount;
-    }
-
-    public double getPaidAmount() {
-        return paidAmount;
-    }
-
-    public void setPaidAmount(double paidAmount) {
-        this.paidAmount = paidAmount;
     }
 }
