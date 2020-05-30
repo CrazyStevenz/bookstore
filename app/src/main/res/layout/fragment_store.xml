@@ -4,7 +4,8 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.store.StoreFragment">
+    tools:context=".view.store.StoreFragment"
+    android:background="#1f1a24">
 
     <androidx.recyclerview.widget.RecyclerView
         xmlns:app="http://schemas.android.com/apk/res-auto"

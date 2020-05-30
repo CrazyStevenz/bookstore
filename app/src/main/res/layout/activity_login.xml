@@ -54,7 +54,7 @@
         android:layout_below="@id/et_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:background="@drawable/btn_rectangle"
+        android:background="@drawable/btn_pill"
         android:text="Login"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#fff" />
