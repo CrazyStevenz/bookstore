@@ -20,8 +20,8 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.crazystevenz.bookstore.view.salelist.SaleFragment"
-        android:label="@string/menu_gallery"
+        android:name="com.crazystevenz.bookstore.view.salelist.SaleListFragment"
+        android:label="@string/menu_salelist"
         tools:layout="@layout/fragment_salelist" />
 
     <fragment
