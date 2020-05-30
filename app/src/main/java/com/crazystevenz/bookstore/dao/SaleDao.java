@@ -1,6 +1,7 @@
 package com.crazystevenz.bookstore.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,9 +12,10 @@ import com.crazystevenz.bookstore.model.Sale;
 
 import java.util.List;
 
+@Dao
 public interface SaleDao {
     @Query("SELECT * FROM sale WHERE id = :id")
-    Customer get(int id);
+    Sale get(int id);
 
     @Query("SELECT * FROM sale")
     LiveData<List<Sale>> getAll();

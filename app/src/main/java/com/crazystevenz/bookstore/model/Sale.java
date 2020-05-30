@@ -54,4 +54,12 @@ public class Sale {
     public void setProductAmount(double productAmount) {
         this.productAmount = productAmount;
     }
+
+    public boolean isComplete() {
+        return complete;
+    }
+
+    public void setComplete(boolean complete) {
+        this.complete = complete;
+    }
 }
