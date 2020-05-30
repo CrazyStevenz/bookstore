@@ -1,4 +1,4 @@
-package com.crazystevenz.bookstore.ui.store;
+package com.crazystevenz.bookstore.view.store;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

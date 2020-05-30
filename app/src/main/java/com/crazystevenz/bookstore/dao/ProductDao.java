@@ -1,5 +1,6 @@
 package com.crazystevenz.bookstore.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,7 +17,7 @@ public interface ProductDao {
     Product get(int id);
 
     @Query("SELECT * FROM product")
-    List<Product> getAll();
+    LiveData<List<Product>> getAll();
 
     @Query("SELECT * FROM product WHERE name LIKE :name LIMIT 1")
     Product getByName(String name);
