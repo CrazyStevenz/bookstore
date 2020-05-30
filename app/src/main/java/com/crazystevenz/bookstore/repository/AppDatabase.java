@@ -50,10 +50,12 @@ public abstract class AppDatabase extends RoomDatabase {
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private CustomerDao customerDao;
         private ProductDao productDao;
+        private SaleDao saleDao;
 
         public PopulateDbAsyncTask(AppDatabase db) {
             this.customerDao = db.customerDao();
             this.productDao = db.productDao();
+            this.saleDao = db.saleDao();
         }
 
         @Override
@@ -64,6 +66,7 @@ public abstract class AppDatabase extends RoomDatabase {
             productDao.insert(new Product("1984", 1,  14.99));
             productDao.insert(new Product("The Talent Code", 12,  20));
             productDao.insert(new Product("What If?", 0,  5.99));
+            saleDao.insert(new Sale(1, 1, 2));
             return null;
         }
     }
