@@ -1,4 +1,4 @@
-package com.crazystevenz.bookstore.view.store;
+package com.crazystevenz.bookstore.view.cart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import com.crazystevenz.bookstore.viewmodel.ProductViewModel;
 
 import java.util.List;
 
-public class StoreFragment extends Fragment {
+public class CartFragment extends Fragment {
 
     private ProductViewModel productViewModel;
     private RecyclerView recyclerView;
@@ -27,7 +27,7 @@ public class StoreFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_store, container, false);
+        final View root = inflater.inflate(R.layout.fragment_cart, container, false);
 
         productViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(ProductViewModel.class);
         productViewModel.getAll().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
@@ -38,7 +38,7 @@ public class StoreFragment extends Fragment {
                 layoutManager = new LinearLayoutManager(root.getContext());
                 recyclerView.setLayoutManager(layoutManager);
 
-                mAdapter = new StoreRecyclerViewAdapter(products);
+                mAdapter = new CartRecyclerViewAdapter(products);
                 recyclerView.setAdapter(mAdapter);
             }
         });
