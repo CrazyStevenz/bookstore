@@ -18,10 +18,12 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     // Source: https://developer.android.com/guide/topics/ui/layout/recyclerview
 
-    private List<Product> mProducts;
+    private static List<Product> mProducts;
+    private EventListener mListener;
 
-    public CartRecyclerViewAdapter(List<Product> products) {
+    public CartRecyclerViewAdapter(List<Product> products, EventListener listener) {
         mProducts = products;
+        mListener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -30,7 +32,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_cart_item, parent, false);
-        return new ProductHolder(itemView);
+        return new ProductHolder(itemView, mListener);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -39,7 +41,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         // Get element from products list at this position
         // and replace the contents of the view with that element
         Product currentProduct = mProducts.get(position);
-        holder.textViewName.setText(currentProduct.getName());
+        holder.textViewName.setText(currentProduct.getAmount() + " in cart - " + currentProduct.getName());
         holder.textViewPrice.setText(currentProduct.getPrice() + " €");
     }
 
@@ -49,16 +51,32 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         return mProducts.size();
     }
 
+    public interface EventListener {
+        void onAddClick(Product product);
+    }
+
     // Provide a reference to the views for each data item
     public static class ProductHolder extends RecyclerView.ViewHolder {
         private TextView textViewName, textViewPrice;
         private ImageButton buttonAddToCart;
 
-        public ProductHolder(@NonNull View itemView) {
+        public ProductHolder(View itemView, final EventListener listener) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.text_name);
             textViewPrice = itemView.findViewById(R.id.text_price);
             buttonAddToCart = itemView.findViewById(R.id.button_addToCart);
+
+            buttonAddToCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onAddClick(mProducts.get(position));
+                        }
+                    }
+                }
+            });
         }
     }
 }

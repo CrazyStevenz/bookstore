@@ -18,17 +18,19 @@ import com.crazystevenz.bookstore.R;
 import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 import com.crazystevenz.bookstore.model.Sale;
+import com.crazystevenz.bookstore.view.store.StoreRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartRecyclerViewAdapter.EventListener {
 
     private CartViewModel cartViewModel;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private List<Product> mProducts;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -47,16 +49,19 @@ public class CartFragment extends Fragment {
 
                 List<Product> products = new ArrayList<>();
                 for (Sale sale : sales) {
-
                     try {
+                        // Get the product object using the product id
                         Product product = cartViewModel.getProductById(sale.getProductId());
+                        // Set product amount to cart amount
+                        product.setAmount(sale.getProductAmount());
                         products.add(product);
                     } catch (ExecutionException | InterruptedException e) {
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
+                mProducts = products;
 
-                mAdapter = new CartRecyclerViewAdapter(products);
+                mAdapter = new CartRecyclerViewAdapter(products, CartFragment.this);
                 recyclerView.setAdapter(mAdapter);
             }
         });
@@ -65,5 +70,13 @@ public class CartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_cart, container, false);
+    }
+
+    public void onAddClick(Product product) {
+        if (cartViewModel.removeFromCart(product)) {
+            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 }

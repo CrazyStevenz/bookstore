@@ -39,4 +39,8 @@ public class SaleRepository {
     public void update(Sale sale) {
         mSaleDao.update(sale);
     }
+
+    public void delete(Sale sale) {
+        mSaleDao.delete(sale);
+    }
 }

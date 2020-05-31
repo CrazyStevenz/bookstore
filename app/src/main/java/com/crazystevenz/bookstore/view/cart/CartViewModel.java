@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 import com.crazystevenz.bookstore.model.Sale;
 import com.crazystevenz.bookstore.repository.ProductRepository;
@@ -37,5 +38,29 @@ public class CartViewModel extends AndroidViewModel {
 
     public Product getProductById(int id) throws ExecutionException, InterruptedException {
         return productRepository.getProductById(id);
+    }
+
+    public boolean removeFromCart(Product product) {
+        if (product.getAmount() <= 0) return false;
+
+        // Return false if sale entry doesn't exist
+        int currentUserId = Customer.getUserInstance().getId();
+        Sale sale = saleRepository.getIncompleteByCustomerIdAndProductId(currentUserId, product.getId());
+        if (sale == null) return false;
+
+        // If amount was more than one, decrement
+        if (product.getAmount() > 1) {
+            sale.setProductAmount(sale.getProductAmount() - 1);
+            saleRepository.update(sale);
+
+        // If amount was one, delete sale
+        } else {
+            saleRepository.delete(sale);
+        }
+
+        // Put the item back to the store
+        productRepository.incrementAmount(product.getId());
+
+        return true;
     }
 }

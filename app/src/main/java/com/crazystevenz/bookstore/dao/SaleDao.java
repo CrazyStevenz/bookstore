@@ -22,7 +22,7 @@ public interface SaleDao {
     @Query("SELECT * FROM sale WHERE complete = 0 AND customer_id = :customerId")
     LiveData<List<Sale>> getIncompleteByCustomerId(int customerId);
 
-    @Query("SELECT * FROM sale WHERE complete = 0 AND id = :customerId AND product_id = :productId")
+    @Query("SELECT * FROM sale WHERE complete = 0 AND customer_id = :customerId AND product_id = :productId")
     Sale getIncompleteByCustomerIdAndProductId(int customerId, int productId);
 
     @Insert

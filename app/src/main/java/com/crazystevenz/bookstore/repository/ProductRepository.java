@@ -28,6 +28,10 @@ public class ProductRepository {
         return new GetProductByIdAsyncTask(mProductDao).execute(id).get();
     }
 
+    public void incrementAmount(int id) {
+        mProductDao.incrementAmount(id);
+    }
+
     public boolean addToCart(Product product) {
         mProductDao.update(product);
 

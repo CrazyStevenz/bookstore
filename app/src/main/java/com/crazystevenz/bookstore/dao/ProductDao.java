@@ -23,6 +23,9 @@ public interface ProductDao {
     @Query("SELECT * FROM product WHERE name LIKE :name LIMIT 1")
     Product getByName(String name);
 
+    @Query("UPDATE product SET amount = amount + 1 WHERE id = :id")
+    void incrementAmount(int id);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Product product);
 
