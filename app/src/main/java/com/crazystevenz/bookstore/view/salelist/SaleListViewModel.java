@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 import com.crazystevenz.bookstore.model.Sale;
+import com.crazystevenz.bookstore.repository.CustomerRepository;
 import com.crazystevenz.bookstore.repository.ProductRepository;
 import com.crazystevenz.bookstore.repository.SaleRepository;
 
@@ -16,13 +18,14 @@ import java.util.concurrent.ExecutionException;
 
 public class SaleListViewModel extends AndroidViewModel {
 
-    private SaleRepository saleRepository;
+    private CustomerRepository customerRepository;
     private ProductRepository productRepository;
     private LiveData<List<Sale>> sales;
 
     public SaleListViewModel(@NonNull Application application) {
         super(application);
-        saleRepository = new SaleRepository(application);
+        SaleRepository saleRepository = new SaleRepository(application);
+        customerRepository = new CustomerRepository(application);
         productRepository = new ProductRepository(application);
         sales = saleRepository.getAll();
     }
@@ -31,8 +34,8 @@ public class SaleListViewModel extends AndroidViewModel {
         return sales;
     }
 
-    public LiveData<List<Sale>> getIncompleteByCustomerId(int id) {
-        return saleRepository.getIncompleteByCustomerId(id);
+    public Customer getCustomerById(int id) {
+        return customerRepository.get(id);
     }
 
     public Product getProductById(int id) throws ExecutionException, InterruptedException {

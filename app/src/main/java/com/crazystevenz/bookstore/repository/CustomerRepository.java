@@ -20,6 +20,10 @@ public class CustomerRepository {
         mCustomers = mCustomerDao.getAll();
     }
 
+    public Customer get(int id) {
+        return mCustomerDao.get(id);
+    }
+
     public LiveData<Double> getBalance(int id) {
         return mCustomerDao.getBalance(id);
     }
@@ -28,15 +32,17 @@ public class CustomerRepository {
         return mCustomers;
     }
 
-    public Customer getByName (String name) {
+    public Customer getByName(String name) {
         List<Customer> customers = mCustomers.getValue();
 
         if (customers == null) return null;
 
+        // Find the customer using their name and return it
         for (Customer customer : customers) {
             if (customer.getUsername().equals(name)) return customer;
         }
 
+        // If a customer with that name is not found
         return null;
     }
 

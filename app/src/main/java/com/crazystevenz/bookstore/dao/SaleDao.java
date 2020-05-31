@@ -16,7 +16,7 @@ public interface SaleDao {
     @Query("SELECT * FROM sale WHERE id = :id")
     Sale get(int id);
 
-    @Query("SELECT * FROM sale")
+    @Query("SELECT * FROM sale ORDER BY id DESC")
     LiveData<List<Sale>> getAll();
 
     @Query("SELECT * FROM sale WHERE complete = 0 AND customer_id = :customerId")

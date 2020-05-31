@@ -66,6 +66,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
             textViewPrice = itemView.findViewById(R.id.text_price);
             buttonAddToCart = itemView.findViewById(R.id.button_addToCart);
 
+            // Emit the event to the parent fragment on click
             buttonAddToCart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

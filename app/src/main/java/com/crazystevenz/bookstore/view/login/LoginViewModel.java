@@ -26,7 +26,7 @@ public class LoginViewModel extends AndroidViewModel {
         return customers;
     }
 
-    public Customer getByName (String name) {
+    public Customer getByName(String name) {
         return customerRepository.getByName(name);
     }
 }

@@ -30,9 +30,9 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         Application app = (getActivity().getApplication());
 
+        // Load the store items and observe for changes
         storeViewModel = new ViewModelProvider.AndroidViewModelFactory(app).create(StoreViewModel.class);
         storeViewModel.getAll().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
@@ -56,10 +56,9 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
         return inflater.inflate(R.layout.fragment_store, container, false);
     }
 
+    // Handle the add to cart event
     public void onAddClick(int position) {
-        if (storeViewModel.addToCart(mProducts, position)) {
-//            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-        } else {
+        if (!storeViewModel.addToCart(mProducts, position)) {
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }
     }

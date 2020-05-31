@@ -39,8 +39,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ProductDao productDao();
     public abstract SaleDao saleDao();
 
+    // Populates the database when it is created
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-        // Populates the database when it is created
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -60,6 +60,7 @@ public abstract class AppDatabase extends RoomDatabase {
             this.saleDao = db.saleDao();
         }
 
+        // Insert dummy data to DB
         @Override
         protected Void doInBackground(Void... voids) {
             customerDao.insert(new Customer("Name1 Surname1", "qwer", "1234", 50.0));

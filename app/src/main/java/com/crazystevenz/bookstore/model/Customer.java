@@ -3,6 +3,8 @@ package com.crazystevenz.bookstore.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.text.DecimalFormat;
+
 @Entity(tableName = "customer")
 public class Customer {
     @PrimaryKey(autoGenerate = true)
@@ -77,6 +79,10 @@ public class Customer {
 
     @Override
     public String toString() {
-        return id + " - " + fullName + " - @" + username + " - " + balance + "€" + "\n\n";
+        // Format to 2 decimal places
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+
+        return id + " - " + fullName + " - @" + username + " - " + df.format(balance) + "€" + "\n\n";
     }
 }

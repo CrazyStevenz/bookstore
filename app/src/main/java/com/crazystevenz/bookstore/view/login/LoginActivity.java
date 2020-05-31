@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.et_password);
         loginButton = findViewById(R.id.login_button);
 
+        // Initializes the loginViewModel so it can use the customer repository
+        // onChanged is irrelevant and is ignored
         loginViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(LoginViewModel.class);
         loginViewModel.getAll().observe(this, new Observer<List<Customer>>() {
             @Override
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+                // Checks for empty fields
                 if (username.trim().isEmpty() || password.trim().isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Empty fields are not allowed", Toast.LENGTH_SHORT).show();
                 } else {
