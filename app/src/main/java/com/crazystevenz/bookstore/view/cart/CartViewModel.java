@@ -52,12 +52,15 @@ public class CartViewModel extends AndroidViewModel {
             totalCost += product.getAmount() * product.getPrice();
         }
         totalCost = (double) Math.round(totalCost * 100) / 100;
+
+        // Get the customer's balance
         Customer customer = Customer.getInstance();
         double balance = customer.getBalance();
 
         // If the cost of the cart items exceeds the customer's balance return
         if (totalCost > balance) return;
 
+        // Update DB entries
         customer.setBalance(balance - totalCost);
         customerRepository.update(customer);
         saleRepository.buy(customer.getId());

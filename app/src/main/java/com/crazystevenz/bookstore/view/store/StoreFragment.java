@@ -39,6 +39,7 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
             public void onChanged(List<Product> products) {
                 recyclerView = getView().findViewById(R.id.recyclerview_product_list);
 
+                // Save products class wide to be used by the add buttons
                 mProducts = products;
 
                 layoutManager = new LinearLayoutManager(getContext());

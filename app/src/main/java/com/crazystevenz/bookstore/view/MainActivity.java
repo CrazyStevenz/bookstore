@@ -59,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.text_username);
+        TextView navFullName = (TextView) headerView.findViewById(R.id.text_full_name);
+        navUsername.setText(Customer.getInstance().getFullName());
+        navFullName.setText("@" + Customer.getInstance().getUsername());
+
         // Update customer balance in the top right of the app bar
         final TextView textViewBalance = findViewById(R.id.text_balance);
         mainViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(MainViewModel.class);
