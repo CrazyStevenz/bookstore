@@ -28,6 +28,7 @@
         android:textSize="20sp"
         android:textColor="#fff"
         android:background="@drawable/btn_pill"
-        android:backgroundTint="@color/colorAccent"/>
+        android:backgroundTint="@color/colorAccent"
+        android:visibility="gone" />
 
 </RelativeLayout>

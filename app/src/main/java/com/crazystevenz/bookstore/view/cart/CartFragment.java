@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 import com.crazystevenz.bookstore.model.Sale;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -29,7 +31,6 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<Product> mProducts;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -58,7 +59,21 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
-                mProducts = products;
+
+                Button buy = getView().findViewById(R.id.button_buy);
+
+                if (products.isEmpty()) {
+                    buy.setVisibility(View.GONE);
+                } else {
+                    double totalCost = 0;
+                    for (Product product : products) {
+                        totalCost += product.getAmount() * product.getPrice();
+                    }
+                    DecimalFormat df = new DecimalFormat();
+                    df.setMaximumFractionDigits(2);
+                    buy.setText("BUY - " + df.format(totalCost) + "€");
+                    buy.setVisibility(View.VISIBLE);
+                }
 
                 mAdapter = new CartRecyclerViewAdapter(products, CartFragment.this);
                 recyclerView.setAdapter(mAdapter);
@@ -71,9 +86,9 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
-    public void onAddClick(Product product) {
+    public void onRemoveClick(Product product) {
         if (cartViewModel.removeFromCart(product)) {
-            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }

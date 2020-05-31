@@ -57,7 +57,7 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
 
     public void onAddClick(int position) {
         if (storeViewModel.addToCart(mProducts, position)) {
-            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
         }

@@ -52,7 +52,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     }
 
     public interface EventListener {
-        void onAddClick(Product product);
+        void onRemoveClick(Product product);
     }
 
     // Provide a reference to the views for each data item
@@ -72,7 +72,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            listener.onAddClick(mProducts.get(position));
+                            listener.onRemoveClick(mProducts.get(position));
                         }
                     }
                 }
