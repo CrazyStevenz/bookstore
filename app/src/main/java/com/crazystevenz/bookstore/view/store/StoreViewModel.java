@@ -36,7 +36,7 @@ public class StoreViewModel extends AndroidViewModel {
         if (product.getAmount() < 1) return false;
         product.setAmount(product.getAmount() - 1);
 
-        int currentUserId = Customer.getUserInstance().getId();
+        int currentUserId = Customer.getInstance().getId();
 
         Sale sale = saleRepository.getIncompleteByCustomerIdAndProductId(currentUserId, product.getId());
 

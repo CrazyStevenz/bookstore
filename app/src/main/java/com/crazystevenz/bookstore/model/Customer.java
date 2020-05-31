@@ -11,24 +11,26 @@ public class Customer {
     private String password;
     private double balance;
 
+    //region Singleton
     private static Customer customerInstance = null;
 
-    public Customer(String name, String password, double balance) {
-        this.name = name;
-        this.password = password;
-        this.balance = balance;
+    public static Customer getInstance() {
+        return customerInstance;
     }
 
     public void login() {
         customerInstance = this;
     }
 
-    public void logout() {
+    public static void logout() {
         customerInstance = null;
     }
+    //endregion
 
-    public static Customer getUserInstance() {
-        return customerInstance;
+    public Customer(String name, String password, double balance) {
+        this.name = name;
+        this.password = password;
+        this.balance = balance;
     }
 
     public int getId() {

@@ -1,12 +1,17 @@
 package com.crazystevenz.bookstore.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.crazystevenz.bookstore.R;
+import com.crazystevenz.bookstore.model.Customer;
+import com.crazystevenz.bookstore.view.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,6 +43,17 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (!handleNavigationItemSelected(item)) {
+                    navController.navigate(item.getItemId());
+                }
+
+                return true;
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.nav_cart);
             }
         });
+    }
+
+    public boolean handleNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.nav_logout) {
+            Customer.logout();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return false;
     }
 
     @Override

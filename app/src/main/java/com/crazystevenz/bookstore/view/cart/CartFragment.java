@@ -18,7 +18,6 @@ import com.crazystevenz.bookstore.R;
 import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Product;
 import com.crazystevenz.bookstore.model.Sale;
-import com.crazystevenz.bookstore.view.store.StoreRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
         Application app = (getActivity().getApplication());
 
         cartViewModel = new ViewModelProvider.AndroidViewModelFactory(app).create(CartViewModel.class);
-        cartViewModel.getIncompleteByUserId(Customer.getUserInstance().getId()).observe(getViewLifecycleOwner(), new Observer<List<Sale>>() {
+        cartViewModel.getIncompleteByUserId(Customer.getInstance().getId()).observe(getViewLifecycleOwner(), new Observer<List<Sale>>() {
             @Override
             public void onChanged(List<Sale> sales) {
                 recyclerView = getView().findViewById(R.id.recyclerview_product_list);

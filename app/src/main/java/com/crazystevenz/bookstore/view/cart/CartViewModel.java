@@ -44,7 +44,7 @@ public class CartViewModel extends AndroidViewModel {
         if (product.getAmount() <= 0) return false;
 
         // Return false if sale entry doesn't exist
-        int currentUserId = Customer.getUserInstance().getId();
+        int currentUserId = Customer.getInstance().getId();
         Sale sale = saleRepository.getIncompleteByCustomerIdAndProductId(currentUserId, product.getId());
         if (sale == null) return false;
 
