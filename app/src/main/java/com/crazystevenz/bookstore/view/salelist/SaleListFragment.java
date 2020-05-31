@@ -47,7 +47,7 @@ public class SaleListFragment extends Fragment {
                         sb.append(" - ");
                         sb.append(product.getName());
                         sb.append(" - ");
-                        sb.append(product.getAmount());
+                        sb.append(sale.getProductAmount());
                         sb.append("\n");
                         if (sale.isComplete()) sb.append("Complete");
                         else sb.append("In cart");
