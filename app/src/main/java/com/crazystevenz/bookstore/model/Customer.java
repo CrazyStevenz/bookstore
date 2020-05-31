@@ -77,6 +77,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return id + " - " + username + " - " + balance + "€" + "\n";
+        return id + " - " + fullName + " - @" + username + " - " + balance + "€" + "\n\n";
     }
 }
