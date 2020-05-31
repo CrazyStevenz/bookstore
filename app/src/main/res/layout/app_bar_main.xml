@@ -11,24 +11,30 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
+        </androidx.appcompat.widget.Toolbar>
 
             <TextView
                 android:id="@+id/text_balance"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
-                android:textAlignment="viewEnd"
-                android:textSize="24sp"
-                android:textColor="#fff" />
+                android:layout_alignParentEnd="true"
+                android:textSize="22sp"
+                android:textColor="@color/textColor" />
 
-        </androidx.appcompat.widget.Toolbar>
+        </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
