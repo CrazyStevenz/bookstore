@@ -23,6 +23,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel mainViewModel;
@@ -75,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
         mainViewModel.getBalance(Customer.getInstance().getId()).observe(this, new Observer<Double>() {
             @Override
             public void onChanged(Double balance) {
-                textViewBalance.setText(balance + "€");
+                DecimalFormat df = new DecimalFormat();
+                df.setMaximumFractionDigits(2);
+                textViewBalance.setText(df.format(balance) + "€");
             }
         });
 
