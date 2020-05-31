@@ -1,19 +1,26 @@
 package com.crazystevenz.bookstore.view.userlist;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class UserListViewModel extends ViewModel {
+import com.crazystevenz.bookstore.model.Customer;
+import com.crazystevenz.bookstore.repository.CustomerRepository;
 
-    private MutableLiveData<String> mText;
+import java.util.List;
 
-    public UserListViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+public class UserListViewModel extends AndroidViewModel {
+
+    private CustomerRepository customerRepository;
+
+    public UserListViewModel(@NonNull Application application) {
+        super(application);
+        customerRepository = new CustomerRepository(application);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<List<Customer>> getAll() {
+        return customerRepository.getAll();
     }
 }
