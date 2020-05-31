@@ -1,9 +1,11 @@
 package com.crazystevenz.bookstore.view.store;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -14,35 +16,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.crazystevenz.bookstore.R;
 import com.crazystevenz.bookstore.model.Product;
-import com.crazystevenz.bookstore.viewmodel.ProductViewModel;
 
 import java.util.List;
 
-public class StoreFragment extends Fragment {
+public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.EventListener {
 
-    private ProductViewModel productViewModel;
+    private StoreViewModel storeViewModel;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_store, container, false);
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-        productViewModel = new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication()).create(ProductViewModel.class);
-        productViewModel.getAll().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
+        Application app = (getActivity().getApplication());
+
+        storeViewModel = new ViewModelProvider.AndroidViewModelFactory(app).create(StoreViewModel.class);
+        storeViewModel.getAll().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                recyclerView = root.findViewById(R.id.recyclerview_product_list);
+                recyclerView = getView().findViewById(R.id.recyclerview_product_list);
 
-                layoutManager = new LinearLayoutManager(root.getContext());
+                layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
 
-                mAdapter = new StoreRecyclerViewAdapter(products);
+                mAdapter = new StoreRecyclerViewAdapter(products, StoreFragment.this);
                 recyclerView.setAdapter(mAdapter);
             }
         });
+    }
 
-        return root;
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_store, container, false);
     }
 }

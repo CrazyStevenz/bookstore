@@ -14,9 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.crazystevenz.bookstore.R;
-import com.crazystevenz.bookstore.model.Customer;
 import com.crazystevenz.bookstore.model.Sale;
-import com.crazystevenz.bookstore.viewmodel.CustomerViewModel;
 import com.crazystevenz.bookstore.viewmodel.SaleViewModel;
 
 import java.util.List;
