@@ -20,6 +20,10 @@ public class CustomerRepository {
         mCustomers = mCustomerDao.getAll();
     }
 
+    public LiveData<Double> getBalance(int id) {
+        return mCustomerDao.getBalance(id);
+    }
+
     public LiveData<List<Customer>> getAll() {
         return mCustomers;
     }

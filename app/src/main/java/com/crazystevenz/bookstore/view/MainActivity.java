@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.crazystevenz.bookstore.R;
 import com.crazystevenz.bookstore.model.Customer;
@@ -12,6 +13,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MainViewModel mainViewModel;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -55,6 +59,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Update customer balance in the top right of the app bar
+        final TextView textViewBalance = findViewById(R.id.text_balance);
+        mainViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(MainViewModel.class);
+        mainViewModel.getBalance(Customer.getInstance().getId()).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double balance) {
+                textViewBalance.setText(balance + "€");
+            }
+        });
+
+        // Hide floating button in cart page
         final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
