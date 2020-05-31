@@ -1,4 +1,4 @@
-package com.crazystevenz.bookstore.view;
+package com.crazystevenz.bookstore.view.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.crazystevenz.bookstore.R;
 import com.crazystevenz.bookstore.model.Customer;
-import com.crazystevenz.bookstore.viewmodel.CustomerViewModel;
+import com.crazystevenz.bookstore.view.MainActivity;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
     private Button loginButton;
-    private CustomerViewModel customerViewModel;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.et_password);
         loginButton = findViewById(R.id.login_button);
 
-        customerViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(CustomerViewModel.class);
-        customerViewModel.getAll().observe(this, new Observer<List<Customer>>() {
+        loginViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(LoginViewModel.class);
+        loginViewModel.getAll().observe(this, new Observer<List<Customer>>() {
             @Override
             public void onChanged(List<Customer> customers) {}
         });
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // Compares credentials with DB
             void login (String username, String password) {
-                Customer customer = customerViewModel.getByName(username);
+                Customer customer = loginViewModel.getByName(username);
                 if (credentialsAreValid(customer, username, password)) {
                     customer.login();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

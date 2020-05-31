@@ -1,4 +1,4 @@
-package com.crazystevenz.bookstore.viewmodel;
+package com.crazystevenz.bookstore.view.login;
 
 import android.app.Application;
 
@@ -11,12 +11,12 @@ import com.crazystevenz.bookstore.repository.CustomerRepository;
 
 import java.util.List;
 
-public class CustomerViewModel extends AndroidViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
     private CustomerRepository customerRepository;
     private LiveData<List<Customer>> customers;
 
-    public CustomerViewModel(@NonNull Application application){
+    public LoginViewModel(@NonNull Application application){
         super(application);
         customerRepository = new CustomerRepository(application);
         customers = customerRepository.getAll();
