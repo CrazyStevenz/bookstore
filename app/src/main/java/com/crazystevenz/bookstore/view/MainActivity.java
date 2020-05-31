@@ -47,18 +47,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        // Handles drawer item clicks
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Checks if the logout button was pressed
                 if (!handleNavigationItemSelected(item)) {
                     navController.navigate(item.getItemId());
                 }
 
+                // Closes drawer and navigates to selected view
                 drawer.closeDrawers();
                 return true;
             }
         });
 
+        // Change the default drawer headers to customer data
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.text_username);
         TextView navFullName = (TextView) headerView.findViewById(R.id.text_full_name);
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Hide floating button in cart page
+        // Hide floating action button in cart page
         final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // When logout drawer item is clicked, deletes the customer singleton and changes view to login
     public boolean handleNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_logout) {
             Customer.logout();
