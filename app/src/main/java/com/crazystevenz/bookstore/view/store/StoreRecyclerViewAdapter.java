@@ -42,7 +42,7 @@ public class StoreRecyclerViewAdapter extends RecyclerView.Adapter<StoreRecycler
         // and replace the contents of the view with that element
         Product currentProduct = mProducts.get(position);
         holder.textViewName.setText(currentProduct.getAmount() + " left - " + currentProduct.getName());
-        holder.textViewPrice.setText(currentProduct.getPrice() + " €");
+        holder.textViewPrice.setText(currentProduct.getPrice() + "€");
     }
 
     // Return the size of the products list (invoked by the layout manager)
