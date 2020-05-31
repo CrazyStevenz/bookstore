@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.login.LoginActivity">
+    tools:context=".view.login.LoginActivity"
+    android:background="#1f1a24">
 
     <ImageView
         android:id="@+id/iv_book"
@@ -33,7 +34,12 @@
         android:layout_marginTop="100dp"
         android:ems="12"
         android:hint="Name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textColorLink="@color/textColor"
+        android:textColorHighlight="@color/textColor"
+        android:backgroundTint="@color/textColor" />
 
     <EditText
         android:id="@+id/et_password"
@@ -45,7 +51,11 @@
         android:ems="12"
         android:hint="Password"
         android:inputType="textPassword"
-        />
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textColorLink="@color/textColor"
+        android:textColorHighlight="@color/textColor"
+        android:backgroundTint="@color/textColor" />
 
     <Button
         android:id="@+id/login_button"
@@ -57,5 +67,5 @@
         android:background="@drawable/btn_pill"
         android:text="Login"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#fff" />
+        android:textColor="@color/textColor" />
 </RelativeLayout>

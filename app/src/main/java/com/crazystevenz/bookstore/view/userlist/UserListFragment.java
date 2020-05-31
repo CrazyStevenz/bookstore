@@ -23,9 +23,9 @@ public class UserListFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Load and display customer data to the fragment
         Application app = (getActivity().getApplication());
         final TextView textView = getView().findViewById(R.id.text_userlist);
-
         UserListViewModel userlistViewModel =
                 new ViewModelProvider.AndroidViewModelFactory(app).create(UserListViewModel.class);
         userlistViewModel.getAll().observe(getViewLifecycleOwner(), new Observer<List<Customer>>() {
