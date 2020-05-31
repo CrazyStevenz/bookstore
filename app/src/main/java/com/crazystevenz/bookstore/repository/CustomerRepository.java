@@ -35,4 +35,8 @@ public class CustomerRepository {
 
         return null;
     }
+
+    public void update(Customer customer) {
+        mCustomerDao.update(customer);
+    }
 }

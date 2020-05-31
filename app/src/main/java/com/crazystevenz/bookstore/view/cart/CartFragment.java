@@ -31,12 +31,14 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private List<Product> mProducts = new ArrayList<>();
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         Application app = (getActivity().getApplication());
+        final Button buy = getView().findViewById(R.id.button_buy);
 
         cartViewModel = new ViewModelProvider.AndroidViewModelFactory(app).create(CartViewModel.class);
         cartViewModel.getIncompleteByUserId(Customer.getInstance().getId()).observe(getViewLifecycleOwner(), new Observer<List<Sale>>() {
@@ -47,26 +49,24 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
                 layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
 
-                List<Product> products = new ArrayList<>();
+                mProducts.clear();
                 for (Sale sale : sales) {
                     try {
                         // Get the product object using the product id
                         Product product = cartViewModel.getProductById(sale.getProductId());
                         // Set product amount to cart amount
                         product.setAmount(sale.getProductAmount());
-                        products.add(product);
+                        mProducts.add(product);
                     } catch (ExecutionException | InterruptedException e) {
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
-                Button buy = getView().findViewById(R.id.button_buy);
-
-                if (products.isEmpty()) {
+                if (mProducts.isEmpty()) {
                     buy.setVisibility(View.GONE);
                 } else {
                     double totalCost = 0;
-                    for (Product product : products) {
+                    for (Product product : mProducts) {
                         totalCost += product.getAmount() * product.getPrice();
                     }
                     DecimalFormat df = new DecimalFormat();
@@ -75,8 +75,15 @@ public class CartFragment extends Fragment implements CartRecyclerViewAdapter.Ev
                     buy.setVisibility(View.VISIBLE);
                 }
 
-                mAdapter = new CartRecyclerViewAdapter(products, CartFragment.this);
+                mAdapter = new CartRecyclerViewAdapter(mProducts, CartFragment.this);
                 recyclerView.setAdapter(mAdapter);
+            }
+        });
+
+        buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartViewModel.buy(mProducts);
             }
         });
     }

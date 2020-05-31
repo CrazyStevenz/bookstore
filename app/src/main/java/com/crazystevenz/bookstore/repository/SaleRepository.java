@@ -32,6 +32,10 @@ public class SaleRepository {
         return mSaleDao.getIncompleteByCustomerIdAndProductId(customerId, productId);
     }
 
+    public void buy(int customerId) {
+        mSaleDao.buy(customerId);
+    }
+
     public void insert(Sale sale) {
         mSaleDao.insert(sale);
     }

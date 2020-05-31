@@ -25,6 +25,9 @@ public interface SaleDao {
     @Query("SELECT * FROM sale WHERE complete = 0 AND customer_id = :customerId AND product_id = :productId")
     Sale getIncompleteByCustomerIdAndProductId(int customerId, int productId);
 
+    @Query("UPDATE sale SET complete = 1 WHERE customer_id = :customerId AND complete = 0")
+    void buy(int customerId);
+
     @Insert
     void insert(Sale sale);
 
