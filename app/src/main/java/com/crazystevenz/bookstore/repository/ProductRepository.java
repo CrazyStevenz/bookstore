@@ -14,20 +14,24 @@ import java.util.concurrent.ExecutionException;
 public class ProductRepository {
 
     private ProductDao mProductDao;
-    private LiveData<List<Product>> mProducts;
 
     public ProductRepository (Application application) {
         AppDatabase db = AppDatabase.getInstance(application);
         mProductDao = db.productDao();
-        mProducts = mProductDao.getAll();
     }
 
     public LiveData<List<Product>> getAll() {
-        return mProducts;
+        return mProductDao.getAll();
     }
 
     public Product getProductById(int id) throws ExecutionException, InterruptedException {
         return new GetProductByIdAsyncTask(mProductDao).execute(id).get();
+    }
+
+    public boolean addToCart(Product product) {
+        mProductDao.update(product);
+
+        return true;
     }
 
     private static class GetProductByIdAsyncTask extends AsyncTask<Integer, Void, Product> {

@@ -24,7 +24,19 @@ public class SaleRepository {
         return mSales;
     }
 
-    public LiveData<List<Sale>> getIncompleteByUserId(int id) {
-        return mSaleDao.getIncompleteByUserId(id);
+    public LiveData<List<Sale>> getIncompleteByCustomerId(int id) {
+        return mSaleDao.getIncompleteByCustomerId(id);
+    }
+
+    public Sale getIncompleteByCustomerIdAndProductId(int customerId, int productId) {
+        return mSaleDao.getIncompleteByCustomerIdAndProductId(customerId, productId);
+    }
+
+    public void insert(Sale sale) {
+        mSaleDao.insert(sale);
+    }
+
+    public void update(Sale sale) {
+        mSaleDao.update(sale);
     }
 }

@@ -21,10 +21,10 @@ public class Sale {
     @ColumnInfo(name = "product_id")
     private int productId;
     @ColumnInfo(name = "product_amount")
-    private double productAmount;
+    private int productAmount;
     private boolean complete;
 
-    public Sale(int customerId, int productId, double productAmount) {
+    public Sale(int customerId, int productId, int productAmount) {
         this.customerId = customerId;
         this.productId = productId;
         this.productAmount = productAmount;
@@ -55,11 +55,11 @@ public class Sale {
         this.productId = productId;
     }
 
-    public double getProductAmount() {
+    public int getProductAmount() {
         return productAmount;
     }
 
-    public void setProductAmount(double productAmount) {
+    public void setProductAmount(int productAmount) {
         this.productAmount = productAmount;
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -22,7 +23,7 @@ public interface ProductDao {
     @Query("SELECT * FROM product WHERE name LIKE :name LIMIT 1")
     Product getByName(String name);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Product product);
 
     @Insert

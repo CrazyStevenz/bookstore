@@ -25,6 +25,7 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private List<Product> mProducts;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
             public void onChanged(List<Product> products) {
                 recyclerView = getView().findViewById(R.id.recyclerview_product_list);
 
+                mProducts = products;
+
                 layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
 
@@ -50,5 +53,13 @@ public class StoreFragment extends Fragment implements StoreRecyclerViewAdapter.
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_store, container, false);
+    }
+
+    public void onAddClick(int position) {
+        if (storeViewModel.addToCart(mProducts, position)) {
+            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 }

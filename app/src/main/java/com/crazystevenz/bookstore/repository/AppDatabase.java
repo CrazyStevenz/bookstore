@@ -19,23 +19,25 @@ import com.crazystevenz.bookstore.model.Sale;
 @Database(entities = {Customer.class, Product.class, Sale.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
+    // region Singleton
     private static AppDatabase instance;
-
-    public abstract CustomerDao customerDao();
-    public abstract ProductDao productDao();
-    public abstract SaleDao saleDao();
-
     public static synchronized AppDatabase getInstance(Context context) {
         // If the instance does not exist, create one
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class, "app_database")
+                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
         }
         return instance;
     }
+    // endregion
+
+    public abstract CustomerDao customerDao();
+    public abstract ProductDao productDao();
+    public abstract SaleDao saleDao();
 
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         // Populates the database when it is created

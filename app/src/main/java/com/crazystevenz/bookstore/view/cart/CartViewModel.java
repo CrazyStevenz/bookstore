@@ -32,7 +32,7 @@ public class CartViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Sale>> getIncompleteByUserId(int id) {
-        return saleRepository.getIncompleteByUserId(id);
+        return saleRepository.getIncompleteByCustomerId(id);
     }
 
     public Product getProductById(int id) throws ExecutionException, InterruptedException {

@@ -31,8 +31,8 @@ public class SaleListViewModel extends AndroidViewModel {
         return sales;
     }
 
-    public LiveData<List<Sale>> getIncompleteByUserId(int id) {
-        return saleRepository.getIncompleteByUserId(id);
+    public LiveData<List<Sale>> getIncompleteByCustomerId(int id) {
+        return saleRepository.getIncompleteByCustomerId(id);
     }
 
     public Product getProductById(int id) throws ExecutionException, InterruptedException {
