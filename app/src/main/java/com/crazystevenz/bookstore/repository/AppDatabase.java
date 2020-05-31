@@ -62,8 +62,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            customerDao.insert(new Customer("stef", "1234", 50.0));
-            customerDao.insert(new Customer("bob", "1234", 10.0));
+            customerDao.insert(new Customer("Name1 Surname1", "qwer", "1234", 50.0));
+            customerDao.insert(new Customer("Name2 Surname2", "asdf", "1234", 10.0));
             productDao.insert(new Product("Permanent Record", 3,  9.99));
             productDao.insert(new Product("1984", 1,  14.99));
             productDao.insert(new Product("The Talent Code", 12,  20));

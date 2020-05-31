@@ -30,7 +30,7 @@ public class CustomerRepository {
         if (customers == null) return null;
 
         for (Customer customer : customers) {
-            if (customer.getName().equals(name)) return customer;
+            if (customer.getUsername().equals(name)) return customer;
         }
 
         return null;

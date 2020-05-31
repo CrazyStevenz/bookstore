@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
             boolean credentialsAreValid (Customer customer, String username, String password) {
                 return customer != null
-                    && customer.getName().equals(username)
+                    && customer.getUsername().equals(username)
                     && customer.getPassword().equals(password);
             }
         });

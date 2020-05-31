@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey;
 public class Customer {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String name;
+    private String fullName;
+    private String username;
     private String password;
     private double balance;
 
@@ -27,8 +28,9 @@ public class Customer {
     }
     //endregion
 
-    public Customer(String name, String password, double balance) {
-        this.name = name;
+    public Customer(String fullName, String username, String password, double balance) {
+        this.fullName = fullName;
+        this.username = username;
         this.password = password;
         this.balance = balance;
     }
@@ -41,12 +43,20 @@ public class Customer {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -67,6 +77,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return id + " - " + name + " - " + balance + "€" + "\n";
+        return id + " - " + username + " - " + balance + "€" + "\n";
     }
 }
